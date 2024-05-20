@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, {useState} from "react";
 import CreatePlaceButton from "./CreatePlacePage";
 import { useContext } from "react";
@@ -5,7 +6,7 @@ import { AuthContext } from "../UserContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-const CreatePlaceForm = () => {
+const CreatePlaceForm = ({setFormOpen}) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
@@ -85,7 +86,10 @@ const CreatePlaceForm = () => {
   }
   return (
     <div className="flex flex-col mt-6 shadow-2xl p-4 rounded-lg">
+      <div className="flex justify-between">
       <h1 className="text-center text-2xl font-semibold">Create a new place</h1>
+      <button onClick={() => setFormOpen(false)} className="bg-[#f5f5f5] p-2 rounded-sm mt-4">Close</button>
+      </div>
       <form className="flex flex-col gap-4 mt-8">
         <input
           className="border rounded-sm border-[#ccc] p-3"
