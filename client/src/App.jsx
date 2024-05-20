@@ -20,7 +20,7 @@ function App() {
         <Route path="/profile/:subpage?" element={<Profile/>} />
         <Route path="/profile/:subpage/:action" element={<Profile/>} />
         {/* Route to show place details */}
-        <Route path="profile/places/:placeId" element={<ShowPlace/>} />
+        <Route path="profile/places/details/:placeId" element={<ShowPlace/>} />
         <Route path="/login" element={<LoginPage/>} />
         <Route path="/register" element={<RegisterPage/>} />
         
