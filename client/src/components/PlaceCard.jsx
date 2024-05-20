@@ -24,7 +24,7 @@ const PlaceCard = (props) => {
             <div className='flex gap-4'>
             {props.place.photos.map((photo) => {
                 return (
-                <img key={photo} src={`http://localhost:3000/uploads/place-photos/${photo}`} alt={props.place.title} className='w-1/4 rounded-lg'/>
+                <img key={photo} src={`http://localhost:3000/uploads/place-photos/${photo}`} alt={props.place.title} className='w-1/4 rounded-lg object-cover'/>
                 )
             })}
             </div>
