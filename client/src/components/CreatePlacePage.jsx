@@ -11,6 +11,7 @@ const CreatePlacePage = () => {
   const { action } = useParams()
   const [userPlaces, setUserPlaces] = useState([])
   const user = window.localStorage.getItem('user') ? JSON.parse(window.localStorage.getItem('user')) : null
+  const [formOpen, setFormOpen] = useState(false)
   console.log({userId:user.id})
   // fetch user places from the server by user id and set the userPlaces state
   useEffect(() => {
@@ -30,17 +31,12 @@ const CreatePlacePage = () => {
   }, [user.id])
   return (
     <div className='flex flex-col p-10'>
-      {action === 'new' ? (
-        <CreatePlaceForm/>
-      ) : (
-        <Link to={"/profile/places/new"} className="bg-airbnb-red text-center mb-4 w-full rounded-full p-2 text-[#fff] font-bold">
-            Create Place
-        </Link>
-      )}
+      { formOpen ? <CreatePlaceForm setFormOpen={setFormOpen}/> : <button onClick={() => setFormOpen(true)} className='bg-airbnb-red text-white p-2 rounded-lg'>Create a new place</button> }
+      <div className='grid md:grid-cols-2 gap-2 lg:grid-cols-3'>
       {userPlaces.length > 0 ? (
         userPlaces.map((place) => {
           return (
-            <Link to={`/profile/places/${place._id}`} key={place._id}>
+            <Link to={`/profile/places/details/${place._id}`} key={place._id}>
             <PlaceCard key={place._id} place={place} />
             </Link>
           )
@@ -48,6 +44,8 @@ const CreatePlacePage = () => {
       ) : (
         <div className='text-center'>You have no places yet. Create one now!</div>
       )}
+
+      </div>
     </div>
   )
 }
