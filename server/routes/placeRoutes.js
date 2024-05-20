@@ -23,14 +23,25 @@ placeRouter.post("/create-place", async (req, res) => {
     checkIn,
     checkOut,
     maxGuests,
-    userId
+    userId,
   } = req.body;
-  if (!title || !description || !address || !photos || !perks || !extraInfo || !checkIn || !checkOut || !maxGuests || !userId) {
+  if (
+    !title ||
+    !description ||
+    !address ||
+    !photos ||
+    !perks ||
+    !extraInfo ||
+    !checkIn ||
+    !checkOut ||
+    !maxGuests ||
+    !userId
+  ) {
     return res.status(400).json({
       message: "Please enter all fields",
     });
   }
-  
+
   const newPlace = await PlaceModel.create({
     title,
     description,
@@ -66,7 +77,7 @@ placeRouter.post("/create-place", async (req, res) => {
 
 // get user's places endpoint
 placeRouter.get("/user-places", async (req, res) => {
-  const {userId} = req.query;
+  const { userId } = req.query;
   if (!userId) {
     return res.status(400).json({
       message: "Please provide user ID",
@@ -74,5 +85,19 @@ placeRouter.get("/user-places", async (req, res) => {
   }
   const user = await UserModel.findById(userId);
   const places = await PlaceModel.find({ owner: userId });
-  res.json({message: `${user.name}'s places fetched successfuly`,counts: places.length ,places});
+  res.json({
+    message: `${user.name}'s places fetched successfuly`,
+    counts: places.length,
+    places,
+  });
+});
+// get place by id endpoint
+placeRouter.get("/place-details/:placeId", async (req, res) => {
+  const { placeId } = req.params;
+  try {
+    const place = await PlaceModel.findById(placeId).populate("owner", "name email");
+    res.json({message: "Place details fetched succesfully", place});
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
