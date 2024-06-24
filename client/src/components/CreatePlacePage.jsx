@@ -36,9 +36,9 @@ const CreatePlacePage = () => {
       {userPlaces.length > 0 ? (
         userPlaces.map((place) => {
           return (
-            <Link to={`/profile/places/details/${place._id}`} key={place._id}>
+            
             <PlaceCard key={place._id} place={place} />
-            </Link>
+            
           )
         })
       ) : (

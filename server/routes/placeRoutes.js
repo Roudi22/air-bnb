@@ -101,3 +101,13 @@ placeRouter.get("/place-details/:placeId", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
+// get random places endpoint
+placeRouter.get("/random-places", async (req, res) => {
+  try {
+    const places = await PlaceModel.aggregate([{ $sample: { size: 5 } }]); 
+    res.json({ message: "Random places fetched successfully", places });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
