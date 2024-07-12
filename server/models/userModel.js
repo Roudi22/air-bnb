@@ -18,6 +18,11 @@ const userSchema = new Schema({
     ref: 'Place',
     default: [],
   },
+  bookings: {
+    type: [Schema.Types.ObjectId],
+    ref: 'Place',
+    default: [],
+  },
 }, {timestamps: true});
 // create user model
 const UserModel = model('User', userSchema);

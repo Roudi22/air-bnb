@@ -6,6 +6,7 @@ import { AuthContext } from "../UserContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+
 const CreatePlaceForm = ({setFormOpen}) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -36,6 +37,7 @@ const CreatePlaceForm = ({setFormOpen}) => {
       });
       toast.success(data.message);
       navigate("/profile/places");
+      setFormOpen(false);
       console.log(data);
     } catch (error) {
       console.log(error);

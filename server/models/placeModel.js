@@ -41,6 +41,12 @@ const placeSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User",
     },
+    bookings: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+        },
+    ],
 }, { timestamps: true });
 // create place model
 const PlaceModel = model("Place", placeSchema);

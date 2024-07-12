@@ -9,7 +9,7 @@ const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
     const [cookies, setCookie, removeCookie] = useCookies(['token']);
-
+    const [loading, setLoading] = useState(true);
     const logout = async () => {
         try {
             await axios.post('/logout');
@@ -25,6 +25,7 @@ const AuthProvider = ({ children }) => {
     }
     useEffect(() => {
         if (cookies.token) {
+            setLoading(true);
             axios.get('/profile',{
                 headers: {
                     Authorization: `${cookies.token}`,
@@ -32,11 +33,16 @@ const AuthProvider = ({ children }) => {
             }).then((res) => {
                 setUser(res.data.user);
                 setIsLoggedIn(true);
-            });
+            }).catch((error) => {
+                console.log(error);
+                setIsLoggedIn(false);
+            }).finally(() => {
+                setLoading(false);
+        });
         }
     }, [cookies.token]);
     return (
-    <AuthContext.Provider value={{ isLoggedIn, logout, setIsLoggedIn, user, setUser }}>
+    <AuthContext.Provider value={{ isLoggedIn, loading ,logout, setIsLoggedIn, user, setUser }}>
       {children}
     </AuthContext.Provider>
   );

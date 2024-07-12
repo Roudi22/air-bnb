@@ -8,6 +8,7 @@ import { AuthContext } from "../UserContext";
 import { toast } from "react-toastify";
 import axios from "axios";
 import CreatePlacePage from "../components/CreatePlacePage";
+import UserBookingsPage from "./UserBookingsPage";
 
 const Profile = () => {
   const { setIsLoggedIn, setUser } = useContext(AuthContext);
@@ -60,6 +61,7 @@ const Profile = () => {
           </div>
         )}
         {subpage === "places" && <CreatePlacePage/>}
+        {subpage === "bookings" && <UserBookingsPage/>}
       </div>
     </>
   );

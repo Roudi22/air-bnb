@@ -11,6 +11,7 @@ const Navbar = () => {
     e.stopPropagation();
     setMenuOpen((prev) => !prev);
   }
+  console.log(isLoggedIn)
   useEffect(() => {
     const closeMenu = (e) => {
       if (menuOpen && menuRef.current && !menuRef.current.contains(e.target)) {
@@ -25,7 +26,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="sticky top-0">
+      <div className="sticky top-0 z-50">
         <header className="py-4 px-10 flex items-center w-full justify-between border-b bg-[#ffffff] border-[#dddddd]">
           <Link to={"/"} className="flex items-center">
             <svg
@@ -43,7 +44,7 @@ const Navbar = () => {
               />
             </svg>
             <span className="text-2xl hidden lg:block font-bold text-airbnb-red">
-              Air-bnb
+              Booka
             </span>
           </Link>
           <div className="max-[600px]:hidden">
@@ -70,7 +71,7 @@ const Navbar = () => {
             </div>
           </div>
           {menuOpen && (
-            <div ref={menuRef} className="absolute shadow-md flex flex-col right-12 top-[70px] w-36 border gap-2 rounded-lg border-[#dddddd] bg-[#ffffff]">
+            <div ref={menuRef} className="absolute z-50 shadow-md flex flex-col right-12 top-[70px] w-36 border gap-2 rounded-lg border-[#dddddd] bg-[#ffffff]">
               <div className="flex flex-col py-2 gap-2">
                 <Link
                   onClick={() => setMenuOpen((prev) => !prev)}
@@ -91,7 +92,7 @@ const Navbar = () => {
           )}
           {/* if the menu open and there is a user */}
           {menuOpen && isLoggedIn && (
-            <div className="absolute shadow-md flex flex-col right-12 top-[70px] w-36 border gap-2 rounded-lg border-[#dddddd] bg-[#ffffff]">
+            <div className="absolute z-50 shadow-md flex flex-col right-12 top-[70px] w-36 border gap-2 rounded-lg border-[#dddddd] bg-[#ffffff]">
               <div className="flex flex-col py-2 gap-2">
                 <Link
                   onClick={() => setMenuOpen((prev) => !prev)}
