@@ -21,9 +21,6 @@ app.use("/uploads/place-photos", express.static(path.join(path.resolve(), "/uplo
 
 // use cors
 app.use(cors());
-app.get('/test', (req, res) => {
-  res.json('Hello World');
-});
 
 // register user with name, email and password endpoint
 app.use(userRouter, placeRouter);
