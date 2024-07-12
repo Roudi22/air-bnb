@@ -21,7 +21,7 @@ app.use("/uploads/place-photos", express.static(path.join(path.resolve(), "/uplo
 
 // use cors
 app.use(cors({
-  
+  origin: 'https://booka-air.netlify.app/',
   credentials: true,
 }));
 app.get('/test', (req, res) => {
